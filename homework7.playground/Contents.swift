@@ -15,7 +15,7 @@ enum SaleErrors:Error{
 enum printErrors:Error{
     case InvalidInfo
 }
-/*
+
 class JeansMagazine{
     var JeansInStock = [
         "Regular fit": Jeans(name: "Regular fit", JeansSize: 32, PriceOfJeans: 99.9),
@@ -44,9 +44,9 @@ class JeansMagazine{
  
 
     
-var request = Jeans(name: "Jeggings Fir", JeansSize: 30, PriceOfJeans: 70.5)
+var requestOne = Jeans(name: "Jeggings Fir", JeansSize: 30, PriceOfJeans: 70.5)
 var store = JeansMagazine()
-var Result = store.BuyingJeans(Request: request)
+var Result = store.BuyingJeans(Request: requestOne)
 if Result.0 == true {
     print("Thx for buying in our store")
     print("In stock:\(store.JeansInStock)")
@@ -54,7 +54,7 @@ if Result.0 == true {
 else {
     print("Something wrong: \(Result.1!)")
 }
-*/
+
 /*2. Придумать класс, методы которого могут выбрасывать ошибки. Реализуйте несколько throws-функций. Вызовите их и обработайте результат вызова при помощи конструкции try/catch*/
 
 class SecondJeansMagazine{
@@ -65,7 +65,7 @@ class SecondJeansMagazine{
         "Boyfriend fit": Jeans(name: "Boyfriend fit", JeansSize: 34, PriceOfJeans: 91.9)]
     
     func BuyingJeans(Request: Jeans) throws {
-        guard var index = JeansInStock[Request.name] else {
+        guard let index = JeansInStock[Request.name] else {
             throw SaleErrors.InvalidSelection
         }
         guard index.JeansSize == Request.JeansSize else{
@@ -78,7 +78,7 @@ class SecondJeansMagazine{
         JeansInStock[Request.name] = nil
     }
     func printInfo(request: String) throws{
-        guard var index = JeansInStock[request] else{
+        guard let index = JeansInStock[request] else{
             throw printErrors.InvalidInfo
         }
         print("model: \(index.name)\nSize: \(index.JeansSize)\nPrice:\(index.PriceOfJeans)$")
